@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="assets/js/script.js" defer></script>
+    <title>Kcalculateur - BMR et Calories de l'Assiette</title>
+  </head>
+
+  <body>
+    <!-- Message d'accueil -->
+    <div class="intro-message" id="welcomeMessage">
+      Bonjour, bienvenue sur ton super Kcalculateur
+    </div>
+    <div class="intro-message" id="instructionMessage" style="display: none">
+      Tout d'abord, calculons ton BMR et tes besoins quotidiens en protéines
+    </div>
+
+    <!-- Section de Calcul du BMR -->
+    <div class="container" id="bmrContainer">
+      <h1>Kcalculateur</h1>
+
+      <div class="form-section">
+        <label for="sexe">Sexe :</label>
+        <select name="sexe" id="sexe" required>
+          <option value="homme">Homme</option>
+          <option value="femme">Femme</option>
+        </select>
+
+        <label for="poids">Poids (kg) :</label>
+        <input type="number" name="poids" id="poids" step="0.1" required />
+
+        <label for="taille">Taille (cm) :</label>
+        <input type="number" name="taille" id="taille" required />
+
+        <label for="age">Âge :</label>
+        <input type="number" name="age" id="age" required />
+
+        <label for="activity_level">Niveau d'activité :</label>
+        <select name="activity_level" id="activity_level" required>
+          <option value="sedentary">Sédentaire</option>
+          <option value="active">Actif</option>
+          <option value="very_active">Très actif</option>
+        </select>
+
+        <button type="button" onclick="calculateBMR()">
+          Calculer le BMR et les Besoins en Protéines
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal pour afficher le résultat du BMR -->
+    <div class="modal" id="bmrResultModal">
+      <div class="modal-content">
+        <h2 id="bmrResult"></h2>
+        <button class="close-btn" onclick="goToAssietteForm()">
+          Calculer les Calories de l'Assiette
+        </button>
+      </div>
+    </div>
+
+    <!-- Section de Calcul des Calories de l'Assiette -->
+    <div class="container" id="assietteContainer" style="display: none">
+      <h1>Kcalculateur</h1>
+      <div class="intro-message" id="assietteMessage" style="display: none">
+        Calculons maintenant ensemble ton assiette
+      </div>
+
+      <div class="form-section" id="assietteSection">
+        <fieldset>
+          <legend>Protéines</legend>
+          <div id="proteine-section"></div>
+          <button type="button" onclick="addItem('proteine')">
+            Ajouter une protéine
+          </button>
+        </fieldset>
+
+        <fieldset>
+          <legend>Légumes</legend>
+          <div id="legume-section"></div>
+          <button type="button" onclick="addItem('legume')">
+            Ajouter un légume
+          </button>
+        </fieldset>
+
+        <fieldset>
+          <legend>Féculents</legend>
+          <div id="feculent-section"></div>
+          <button type="button" onclick="addItem('feculent')">
+            Ajouter un féculent
+          </button>
+        </fieldset>
+
+        <button
+          type="button"
+          onclick="calculateAssiette()"
+          style="margin-top: 10px"
+        >
+          Avis du Pro ?
+        </button>
+      </div>
+
+      <div id="assietteDetails">
+        <h3>Votre assiette :</h3>
+        <div id="assietteItems"></div>
+        <p id="assietteTotal">Total : 0 kcal</p>
+      </div>
+    </div>
+
+    <!-- Modal pour afficher le résultat final du calcul de l'assiette -->
+    <div class="modal" id="assietteResultModal">
+      <div class="modal-content">
+        <h2 id="assietteResult"></h2>
+        <button class="close-btn" onclick="closeAssietteModal()">OK</button>
+      </div>
+    </div>
+  </body>
+</html>
